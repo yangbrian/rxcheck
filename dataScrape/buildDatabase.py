@@ -16,8 +16,6 @@ def saveToDatabase(data):
     #Save a new document into the collection
     # collection.insert_one(data)
 
-    print(data)
-
 def getNumOfDrugs():
     url = 'https://api.fda.gov/drug/label.json'
     r = requests.get(url)
@@ -34,8 +32,9 @@ numRequests = 0
 
 while offset < getNumOfDrugs():
     #launch request, convert json to dict
-    r = requests.get((url + 'skip=' + offset), data={'apikey': 'PbYvWZzzI8MkEZwGVYCdNXb8kZIp4Itcrp6hfZNJ'})
+    r = requests.get((url + 'skip=' + str(offset)), data={'apikey': 'PbYvWZzzI8MkEZwGVYCdNXb8kZIp4Itcrp6hfZNJ'})
     data = json.loads(r.text)
+    print ('request with offset ' + str(offset) + ' launched. Num requests = ' + str(numRequests))
     numRequests += 1
 
     for drug in data['results']:
