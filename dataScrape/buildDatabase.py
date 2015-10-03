@@ -14,7 +14,7 @@ def saveToDatabase(data):
     collection = db.medInfo
 
     #Save a new document into the collection
-    # collection.insert_one(data)
+    collection.insert_one(data)
 
 def getNumOfDrugs():
     url = 'https://api.fda.gov/drug/label.json'
@@ -41,7 +41,7 @@ while offset < getNumOfDrugs():
         #If the drug has no name, we don't really care about it
         if 'brand_name' in drug['openfda'] or 'generic_name' in drug['openfda']:
             #20 lashes for what I'm about to write...
-            drugInfo = {'_id': drug['openfda']['brand_name'] if 'brand_name' in drug['openfda'] else drug['openfda']['generic_name'],
+            drugInfo = {'brand_namem': drug['openfda']['brand_name'] if 'brand_name' in drug['openfda'] else drug['openfda']['generic_name'],
                           'generic_name': drug['openfda']['generic_name'] if 'generic_name' in drug['openfda'] else '',
                           'do_not_use': drug['do_not_use'] if 'do_not_use' in drug else '',
                           'stop_use': drug['stop_use'] if 'stop_use' in drug else '',
