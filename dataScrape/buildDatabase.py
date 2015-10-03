@@ -30,10 +30,13 @@ url = 'https://api.fda.gov/drug/label.json?limit=100'
 #We can only send 240 API requests a minute.
 offset = 0
 numNamedDrugs = 0
+numRequests = 0
+
 while offset < getNumOfDrugs():
     #launch request, convert json to dict
     r = requests.get((url + 'skip=' + offset), data={'apikey': 'PbYvWZzzI8MkEZwGVYCdNXb8kZIp4Itcrp6hfZNJ'})
     data = json.loads(r.text)
+    numRequests += 1
 
     for drug in data['results']:
         #If the drug has no name, we don't really care about it
@@ -65,7 +68,9 @@ while offset < getNumOfDrugs():
     #set offset
     offset += 100
 
-    #wait a minute
-    time.sleep(60)
+    #wait a minute if 240 requests
+    if numRequests == 240:
+        numRequests = 0
+        time.sleep(60)
 
-print('We have ' + numNamedDrugs + ' named drugs saved.')
+print('We have ' + str(numNamedDrugs) + ' named drugs saved.')
