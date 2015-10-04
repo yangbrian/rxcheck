@@ -3,6 +3,7 @@ from pymongo import MongoClient
 from bson.json_util import dumps
 
 app = Flask(__name__)
+c_handler = CommsHandler.CommsHandler()
 
 
 @app.route('/')
@@ -47,10 +48,37 @@ def uploadEmail():
         collection.insert({'drug_name': drug,
                            'users': userInfo})
 
+    e_handler = c_handler.get_email_sender()
+
+    e_handler.add_recipients(request.form['email'])
+
+
     return Response(response='',
                     status=200,
                     mimetype="application/json")
 
+@app.route('/email/<name>')
+def setEmail(name):
+    client = MongoClient("mongodb://localhost:27017")
+
+    e_handler = c_handler.get_email_sender()
+
+    for data in client.rxcheck.emailInfo.find_all({'drug_name': name}):
+        e_handler.add_recipients(data.userInfo.email)
+
+
+    cursor = client.rxcheck.medInfo.find_one({'brand_name': {
+        '$regex': '^' + name
+            }}, {'brand_name': 1,
+                 'generic_name': 1,
+                 'warnings_and_precautions': 1,
+                 'warnings': 1,
+                 'active_ingredient': 1,
+                 'inactive_ingredient': 1})
+
+    return Response(response=dumps(cursor),
+                    status=200,
+                    mimetype="application/json")
 
 @app.route('/get/warnings/<name>')
 def warnings(name):

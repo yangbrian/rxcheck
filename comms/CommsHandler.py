@@ -30,6 +30,9 @@ class CommsHandler:
 
             raise
 
+    def get_email_sender(self):
+        return self.__email_sender__
+
     def send_text(self, send_to_number, send_from_number, msg):
 
         try:
