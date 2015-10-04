@@ -60,7 +60,7 @@ class RxCheckRestClient():
 
             return self.__twilio_client__.messages.get(text_sid).status
 
-    def create_text(self, send_to_number, twilio_number, message):
+    def create_and_send_text(self, send_to_number, twilio_number, message):
         """
         Method that will create and send a provided message, so long as the
         numbers are valid and the message is of type integer, binary,
