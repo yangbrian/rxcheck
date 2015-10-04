@@ -73,8 +73,9 @@ function addDrug(value, suggestions) {
         drugNames.push(value);
 
         var newItem = $('<li>');
-        newItem.addClass('list-group-item');
-        newItem.html(value);
+        newItem.addClass('list-group-item clearfix');
+        newItem.append('<span class="itemListElement">' + value + '</span>');
+        newItem.append('<button class="btn btn-error closeBtn" onclick="removeDrug(this);">x</button>');
 
         $('#selected-drugs').find('ul').append(newItem);
     }
@@ -90,8 +91,10 @@ function addCondition(value, suggestions) {
         conditions.push(value);
 
         var newItem = $('<li>');
-        newItem.addClass('list-group-item');
-        newItem.html(value);
+        newItem.addClass('list-group-item clearfix');
+        newItem.append('<span class="itemListElement">' + value + '</span>');
+        newItem.append('<button class="btn btn-error closeBtn" onclick="removeCondition(this);">x</button>');
+        //newItem.html(value);
 
         $('#selected-conditions').find('ul').append(newItem);
     }
@@ -104,30 +107,48 @@ function addCondition(value, suggestions) {
 
 $(document).ready(function() {
     $('#warningsButton').on('click', function(e) {
-        //clear table first
-        $('#resultTable tr').has('td').remove();
-
-        $.each(drugNames, function(index, value) {
-            $.getJSON('/get/warnings/' + encodeURIComponent(value), function(data) {
-                var warnings = String(data.warnings_and_precautions.length > data.warnings.length ? data.warnings_and_precautions : data.warnings);
-                var row = $('<tr>');
-
-                //Parse through text. If any of the conditions are said, bold it.
-                $.each(conditions, function(index, value) {
-                    if (warnings.indexOf(value) != -1)
-                        row.addClass('warning');
-                    var re = new RegExp(value, "gi");
-                    warnings = warnings.replace(re, ('<strong>' + value + '</strong>'));
-                });
-
-                row.append('<td>' + data.brand_name + '</td>');
-                row.append('<td>' + data.generic_name + '</td>');
-                row.append('<td>' + warnings + '</td>');
-                row.append('<td>' + data.active_ingredient + '</td>');
-                row.append('<td>' + data.inactive_ingredient + '</td>');
-
-                $('#resultTable').append(row);
-            })
-        })
+        reloadTable();
     })
 });
+
+function reloadTable() {
+    //clear table first
+    $('#resultTable tr').has('td').remove();
+
+    $.each(drugNames, function(index, value) {
+        $.getJSON('/get/warnings/' + encodeURIComponent(value), function(data) {
+            var warnings = String(data.warnings_and_precautions.length > data.warnings.length ? data.warnings_and_precautions : data.warnings);
+            var row = $('<tr>');
+
+            //Parse through text. If any of the conditions are said, bold it.
+            $.each(conditions, function(index, value) {
+                if (warnings.indexOf(value) != -1)
+                    row.addClass('warning');
+                var re = new RegExp(value, "gi");
+                warnings = warnings.replace(re, ('<strong>' + value + '</strong>'));
+            });
+
+            row.append('<td>' + data.brand_name + '</td>');
+            row.append('<td>' + data.generic_name + '</td>');
+            row.append('<td>' + warnings + '</td>');
+            row.append('<td>' + data.active_ingredient + '</td>');
+            row.append('<td>' + data.inactive_ingredient + '</td>');
+
+            $('#resultTable').append(row);
+        })
+    })
+}
+
+function removeDrug(el) {
+    var drug = $(el).parent().children(":first").html();
+    drugNames.splice(drugNames.indexOf(drug), 1);
+    $(el).parent().remove();
+    reloadTable();
+}
+
+function removeCondition(el) {
+    var condition = $(el).parent().children(":first").html();
+    conditions.splice(conditions.indexOf(condition), 1);
+    $(el).parent().remove();
+    reloadTable();
+}
