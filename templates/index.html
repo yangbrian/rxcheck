@@ -25,12 +25,12 @@
 
     <div class="row" id="items">
         <div id="drug-list" class="col-md-6">
-            <ul>
+            <ul data-field="drug-name">
                 <li></li>
             </ul>
         </div>
         <div id="condition-list" class="col-md-6">
-            <ul>
+            <ul data-field="conditions">
                 <li></li>
             </ul>
         </div>
@@ -38,16 +38,22 @@
 
     <div class="row" id="search">
         <div class="col-md-6">
-            <div class="form-group">
-                <input class="form-control" name="drug-name" id="drug-name" placeholder="Enter drug name" />
+            <div class="form-group form-inline">
+                <input class="form-control input-field" name="drug-name" id="drug-name" placeholder="Enter drug name" />
                 <button type="button" class="btn btn-primary">Add</button>
+                <div class="suggestions">
+                    Hi
+                </div>
             </div>
         </div>
 
         <div class="col-md-6">
-            <div class="form-group">
-                <input class="form-control" name="conditions" id="conditions" placeholder="Enter condition"/>
+            <div class="form-group form-inline">
+                <input class="form-control input-field" name="conditions" id="conditions" placeholder="Enter condition"/>
                 <button type="button" class="btn btn-primary">Add</button>
+                <div class="suggestions">
+
+                </div>
             </div>
         </div>
 

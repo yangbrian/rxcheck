@@ -1,4 +1,8 @@
 body {
   font: 14px 'Source Sans Pro'; }
 
+.suggestions {
+  padding: 10px;
+  width: 75px; }
+
 /*# sourceMappingURL=style.css.map */
