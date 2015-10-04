@@ -5,6 +5,7 @@ body {
 .input-control {
   width: 100%;
   padding: 0;
+  position: relative;
 
   .search-group {
     width: 100%;
@@ -14,6 +15,8 @@ body {
     padding: 10px 0;
     width: 100%;
     border: 1px solid #bbb;
+    position: absolute;
+    background-color: #fff;
 
     .suggestion {
       padding: 10px;
