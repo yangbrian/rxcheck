@@ -1,7 +1,7 @@
 body {
   font-family: Lato, sans-serif;
   font-size: 14px;
-  background: url("../img/pharmacy.jpg") fixed;
+  background: #d50000;
   width: 100%;
   height: 100%;
   color: #fff; }
@@ -18,11 +18,12 @@ a {
   height: 100vh; }
   .full-window #welcome {
     position: absolute;
-    transform: translate(-50%);
+    transform: translateY(-50%);
     top: 50%;
-    left: 50%; }
+    width: 100%;
+    text-align: center; }
     .full-window #welcome h1 {
-      font-size: 3em; }
+      font-size: 6.0em; }
 
 .input-control {
   width: 100%;
@@ -50,6 +51,9 @@ a {
         background-color: #b0e0e6;
         cursor: pointer; }
 
+#warningsButton {
+  background-color: #666; }
+
 .selected-items {
   max-height: 200px;
   color: #000;
@@ -57,20 +61,78 @@ a {
 
 #resultTable {
   margin-top: 10px;
-  color: #000; }
+  color: #fff; }
   #resultTable tr {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(239, 141, 141, 0);
     -webkit-transition: all 0.5s linear;
     -moz-transition: all 0.5s linear;
     -ms-transition: all 0.5s linear;
     -o-transition: all 0.5s linear;
     transition: all 0.5s linear; }
     #resultTable tr:hover {
-      background-color: rgba(255, 255, 255, 0.8); }
+      background-color: rgba(239, 141, 141, 0.7); }
+    #resultTable tr.conflict {
+      background-color: black; }
+
+.signup-wrapper {
+  text-align: center;
+  width: 100%; }
 
 footer p {
   text-align: center;
   font-size: 0.85em;
-  color: #333; }
+  color: #ccc; }
+
+@keyframes movedown {
+  0% {
+    top: 30%;
+    opacity: 0; }
+  100% {
+    top: 50%;
+    opacity: 1; } }
+@-webkit-keyframes movedown {
+  0% {
+    top: 30%;
+    opacity: 0; }
+  100% {
+    top: 50%;
+    opacity: 1; } }
+@-moz-keyframes movedown {
+  0% {
+    top: 30%;
+    opacity: 0; }
+  100% {
+    top: 50%;
+    opacity: 1; } }
+@-ms-keyframes movedown {
+  0% {
+    top: 30%;
+    opacity: 0; }
+  100% {
+    top: 50%;
+    opacity: 1; } }
+@-o-keyframes movedown {
+  0% {
+    top: 30%;
+    opacity: 0; }
+  100% {
+    top: 50%;
+    opacity: 1; } }
+.moveDownFade {
+  -webkit-animation: movedown 2s linear forwards;
+  -moz-animation: movedown 2s linear forwards;
+  -ms-animation: movedown 2s linear forwards;
+  -o-animation: movedown 2s linear forwards;
+  animation: movedown 2s linear forwards; }
+
+#notifications {
+  margin: 15px; }
+  #notifications #signup {
+    margin-bottom: 5px; }
+
+#notificationSignup {
+  color: #000; }
+  #notificationSignup .input-group {
+    margin: 5px; }
 
 /*# sourceMappingURL=style.css.map */

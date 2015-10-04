@@ -38,19 +38,19 @@ class EmailSender:
         if msg:
             self.send(msg)
         else:
-            new_drug_info_msg = "Hello; apologies for the intrusion, " \
-                                   "but the drug \'%s\' has been updated " \
+            new_drug_info_msg = "Apologies for the intrusion, " \
+                                   "but the drug -drug- has been updated " \
                                    "with new information! Please visit our " \
-                                   "web-app for the full break-down!" % drug
+                                   "web-app for the full break-down!"
             self.send(new_drug_info_msg)
 
     def send_recall_msg(self, drug, msg=None):
         if msg:
             self.send(msg)
         else:
-            recall_msg = "Hello; this is a message from RxCheck to let you " \
-                         "know that the drug \'%s\' has been recalled. For " \
-                         "more information, please visit our website." % drug
+            recall_msg = "This is a message from RxCheck to let you " \
+                         "know that the drug -drug- has been recalled. For " \
+                         "more information, please visit our website."
             self.send(recall_msg)
 
     def send(self, text):
@@ -65,9 +65,22 @@ class EmailSender:
         message = sendgrid.Mail()
         message.add_to(self.__recipients__)
         message.set_subject("RXCheck Alert!")
-        message.set_html(text)
+
+        html = "<html><head></head><body><p>" + "Hello,<br>" + text + \
+               "<br><br> Warm Regards,<br> RxCheck Team"
+
+        message.set_html(html)
         message.set_text(text)
         message.set_from('RXCheck Development Team <DevMD@RXCheck.com>')
+
+        # This tells the Client to look for our custom Template and activate
+        #  it for our emails
+        message.add_filter('templates', 'enable', '1')
+        message.add_filter('templates', 'template_id',
+                           'a88b4db8-064e-4dfe-85d6-3db95bbe6d94')
+
+        # Substitution!
+        message.add_substitution("-drug-", "Tylenol")
 
         # The SendGrid API does not parse for the reasoning behind the
         # errors, just their origination point.
