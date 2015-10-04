@@ -2,7 +2,8 @@
 
 import twilio
 
-class RxCheckRestClient():
+
+class RxCheckRestClient:
     """
     A wrapper for Twilio's Rest Client to push messages; will raise
     Exceptions at the first sign of trouble.
