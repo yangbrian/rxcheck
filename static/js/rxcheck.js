@@ -19,12 +19,33 @@ $(document).ready(function() {
                 $new.html(value);
 
                 suggestions.append($new);
+
+                $new.on('click', function() {
+                   addDrug(value, suggestions);
+                });
             });
         });
     });
 
 
 });
+
+function addDrug(value, suggestions) {
+    if(drugNames.indexOf(value) == -1) {
+        drugNames.push(value);
+
+        var newItem = $('<li>');
+        newItem.html(value);
+
+        $('#drug-list').find('ul').append(newItem);
+    }
+
+    suggestions.fadeOut();
+    suggestions.html('');
+    $('.input-field').val('');
+
+
+}
 
 $(document).ready(function() {
     $('#warningsButton').on('click', function(e) {
