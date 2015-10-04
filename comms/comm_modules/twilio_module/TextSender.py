@@ -3,7 +3,7 @@
 import twilio
 
 
-class RxCheckRestClient:
+class TextSender:
     """
     A wrapper for Twilio's Rest Client to push messages; will raise
     Exceptions at the first sign of trouble.
@@ -22,10 +22,10 @@ class RxCheckRestClient:
         self.__twilio_client__ = None
 
         try:
-            self.__account_sid__ = self.set_account_sid(sid)
-            self.__auth_token__ = self.set_auth_token(auth_token)
+            self.set_account_sid(sid)
+            self.set_auth_token(auth_token)
             self.__twilio_client__ = twilio.rest.TwilioRestClient(
-                self.__account_sid__, self.__auth_token__)
+                account=self.__account_sid__, token=self.__auth_token__)
 
         except:
             raise

@@ -9,10 +9,9 @@ class EmailSender:
     basic template already set out.
     """
 
-    def __init__(self, un, pw, send_to):
+    def __init__(self, api, send_to):
         # This ensures that Exceptions will be raised to us.
-        self.__sg_client__ = sendgrid.SendGridClient(un, pw,
-                                                     raise_errors=True)
+        self.__sg_client__ = sendgrid.SendGridClient(api, raise_errors=True)
         self.__recipients__ = []
 
         for recipient in send_to:
@@ -35,23 +34,23 @@ class EmailSender:
         else:
             self.__recipients__.append(send_to)
 
-    def send_new_drug_info_msg(self, msg=None):
+    def send_new_drug_info_msg(self, drug, msg=None):
         if msg:
             self.send(msg)
         else:
             new_drug_info_msg = "Hello; apologies for the intrusion, " \
                                    "but the drug \'%s\' has been updated " \
                                    "with new information! Please visit our " \
-                                   "web-app for the full break-down!"
+                                   "web-app for the full break-down!" % drug
             self.send(new_drug_info_msg)
 
-    def send_recall_msg(self, msg=None):
+    def send_recall_msg(self, drug, msg=None):
         if msg:
             self.send(msg)
         else:
             recall_msg = "Hello; this is a message from RxCheck to let you " \
                          "know that the drug \'%s\' has been recalled. For " \
-                         "more information, please visit our website."
+                         "more information, please visit our website." % drug
             self.send(recall_msg)
 
     def send(self, text):
@@ -66,7 +65,7 @@ class EmailSender:
         message = sendgrid.Mail()
         message.add_to(self.__recipients__)
         message.set_subject("RXCheck Alert!")
-        message.set_html('Body')
+        message.set_html(text)
         message.set_text(text)
         message.set_from('RXCheck Development Team <DevMD@RXCheck.com>')
 
