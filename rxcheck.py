@@ -25,6 +25,27 @@ def names(search):
                     status=200,
                     mimetype="application/json")
 
+@app.route('/post/email/', methods=['POST'])
+def uploadEmail():
+    userInfo = {'phone': request.form['phone'],
+                'email': request.form['email']}
+    drugs = request.form['drugs'].split(',')
+
+    #Connect to mongodb client
+    client = MongoClient('localhost', 27017)
+
+    #Get the database
+    db = client.rxcheck
+
+    #Get the collection
+    collection = db.emailInfo
+
+    for drug in drugs:
+        collection.find_one_and_update(
+            {'drug_name': drug},
+            {'$push': {'users': userInfo}})
+
+
 @app.route('/get/warnings/<name>')
 def warnings(name):
     client = MongoClient("mongodb://localhost:27017")
