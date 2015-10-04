@@ -13,14 +13,15 @@ def index():
 @app.route('/get/names/<search>')
 def names(search):
     client = MongoClient("mongodb://localhost:27017")
+
+    def getName(doc):
+        return doc.brand_name
+
     cursor = client.rxcheck.medInfo.find({'brand_name': {
         '$regex': '^' + search
-    }})
+    }}, {'brand_name': 1}).distinct('brand_name')
 
-    def serialize(obj):
-        return obj.__dict__
-
-    return Response(response=dumps(cursor, default=serialize),
+    return Response(response=dumps(cursor),
                     status=200,
                     mimetype="application/json")
 
