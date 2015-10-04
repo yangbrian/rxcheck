@@ -1,6 +1,7 @@
 # einnuJ HackRU 2015
 
 import twilio
+from twilio import twiml
 
 
 class TextSender:
@@ -79,6 +80,63 @@ class TextSender:
                                                           to=send_to_number,
                                                           from_=twilio_number)
             return new_text.sid
+
+        except:
+            raise
+
+
+class TextToSpeechCaller:
+
+    def __init__(self, sid, auth_token):
+        self.__account_sid__ = None
+        self.__auth_token__ = None
+        self.__twilio_client__ = None
+
+        try:
+            self.set_account_sid(sid)
+            self.set_auth_token(auth_token)
+            self.__twilio_client__ = twilio.rest.TwilioRestClient(
+                account=self.__account_sid__, token=self.__auth_token__)
+
+        except:
+            raise
+
+    def generate_twiml_file(self, drug_name, msg=None):
+        """
+        Method that generates a perfectly formed TwiML document that the
+        call will access to read from.
+
+        :param drug_name: name of the drug updated
+        :param msg: None by default; will output standard speech.
+        :return: the String value of the formed twiML.
+        """
+        response = twiml.Response()
+
+        if msg:
+            response.say(msg)
+        else:
+            response.say("Hello! RxCheck is calling to inform you that the "
+                         "drug %s has had new discoveries made about it. "
+                         "Please contact as and your healthcare professional at "
+                         "your earliest convenience for your well-being." %
+                         drug_name)
+
+        return str(response)
+
+    def make_phone_call(self, call_to_number, call_from_number, url):
+        """
+        Makes a phone call using the url as its TwiML basis.
+
+        :param call_to_number: the number to call
+        :param call_from_number: the Twilio number to call from
+        :param url: the page hosting the TwiML document
+        :return: the unique sid of the call
+        """
+
+        try:
+            new_call = self.__twilio_client__.calls.create(call_to_number,
+                                                call_from_number, url)
+            return new_call.sid
 
         except:
             raise
