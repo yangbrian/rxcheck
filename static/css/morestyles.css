@@ -1,0 +1,15 @@
+/*Fuck you and your scss brian yang*/
+
+.input-control .suggestions {
+    z-index: 99999;
+}
+
+.closeBtn {
+    font-size: 0.7em;
+    float: right;
+}
+
+.itemListElement {
+    padding-top: 5px;
+    float: left;
+}

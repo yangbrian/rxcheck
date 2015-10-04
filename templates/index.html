@@ -7,6 +7,7 @@
     <link href='https://fonts.googleapis.com/css?family=Lato:400,100,700,400italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/morestyles.css" />
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -21,7 +22,16 @@
 
 <body>
 
+
+<div class="row full-window">
+    <div id="welcome">
+        <h1>rxCheck</h1>
+        <p>Cool description here.</p>
+    </div>
+</div>
+
 <div class="container">
+
 
     <div class="row" id="search">
         <div class="col-md-6">
@@ -66,12 +76,15 @@
     </div>
 
     <div class="row" id="medCheck">
-        <button type="button" class="btn btn-info" id="warningsButton">Search</button>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-info" id="warningsButton">Search</button>
+        </div>
     </div>
 
     <div class="row" id="results">
-        <table id="resultTable" class="table">
-            <thead>
+        <div class="col-md-12">
+            <table id="resultTable" class="table">
+                <thead>
                 <tr>
                     <th>Brand Name</th>
                     <th>Generic Name</th>
@@ -79,9 +92,18 @@
                     <th>Active Ingredients</th>
                     <th>Inactive Ingredients</th>
                 </tr>
-            </thead>
-        </table>
+                </thead>
+            </table>
+        </div>
+
     </div>
+
+    <footer>
+        <p>
+            Created with &hearts; at <a href="http://devpost.com/software/rxcheck">HackRU IX</a><br>
+            Brian Chen, Junnie Sim, Nicholas Walsh, Brian Yang
+        </p>
+    </footer>
 
 </div>
 
