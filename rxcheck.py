@@ -41,9 +41,11 @@ def uploadEmail():
     collection = db.emailInfo
 
     for drug in drugs:
-        collection.find_one_and_update(
-            {'drug_name': drug},
-            {'$push': {'users': userInfo}})
+        # collection.find_one_and_update(
+        #     {'drug_name': drug},
+        #     {'$push': {'users': userInfo}})
+        collection.insert({'drug_name': drug,
+                           'users': userInfo})
 
     return Response(response='',
                     status=200,
