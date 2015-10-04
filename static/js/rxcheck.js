@@ -37,13 +37,17 @@ $(document).ready(function() {
         //var count = 0;
         var condValue = $(this).val();
 
-        if (condValue.length < 3)
+        console.log(condValue.length);
+
+        if (condValue.length < 4)
             return;
+
+        console.log("MORE");
 
         var fadeIn = false;
         for (var i = 0; i < possibleConditions.length; i++) {
 
-            if (possibleConditions[i].indexOf(condValue) === 0) {
+            if (possibleConditions[i].indexOf(condValue) != -1) {
 
                 if (!fadeIn) {
                     suggestions.fadeIn();
@@ -57,8 +61,6 @@ $(document).ready(function() {
                 $new.html(possibleConditions[i]);
 
                 suggestions.append($new);
-
-                console.log($new);
 
                 $new.on('click', function () {
                     addCondition($(this).attr('data-value'), suggestions);
