@@ -4,14 +4,15 @@ import twilio
 
 class RxCheckRestClient():
     """
-    A wrapper for Twilio's Rest Client to push messages; will attempt to
-    raise Exceptions at the first sign of trouble.
+    A wrapper for Twilio's Rest Client to push messages; will raise
+    Exceptions at the first sign of trouble.
 
     Attributes:
-    __acount_sid__: a unique value representing a text message.
+    __account_sid__: a unique value representing a text message.
     __auth_token__: a unique value representing the owener of the Twilio
         account.
-    __twilio_client: the customer with whom we've developed.
+    __twilio_client: the TwilioRestClient that takes care of the actual
+        technical details.
     """
 
     def __init__(self, sid, auth_token):
