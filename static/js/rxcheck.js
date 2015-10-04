@@ -34,13 +34,15 @@ $(document).ready(function() {
         var suggestions = $(this).parent().siblings('.suggestions');
         suggestions.hide();
 
-        var count = 0;
+        //var count = 0;
         var condValue = $(this).val();
+
+        if (condValue.length < 3)
+            return;
 
         var fadeIn = false;
         for (var i = 0; i < possibleConditions.length; i++) {
 
-            if (condValue === '') break;
             if (possibleConditions[i].indexOf(condValue) === 0) {
 
                 if (!fadeIn) {
@@ -61,9 +63,9 @@ $(document).ready(function() {
                 $new.on('click', function () {
                     addCondition($(this).attr('data-value'), suggestions);
                 });
-
-                count++;
-                if (count > 10) break;
+                //
+                //count++;
+                //if (count > 10) break;
             }
         }
 
