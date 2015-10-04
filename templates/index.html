@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="/static/css/style.css" />
     <link rel="stylesheet" href="/static/css/morestyles.css" />
 
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon"/>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -24,9 +27,9 @@
 
 
 <div class="row full-window">
-    <div id="welcome">
-        <h1>rxCheck</h1>
-        <p>Cool description here.</p>
+    <div id="welcome" class="moveDownFade">
+        <h1><img src='/static/img/logo.png' alt='RxCheck' /></h1>
+        <p><img src='/static/img/tagline.png' /></p>
     </div>
 </div>
 
@@ -97,6 +100,50 @@
         </div>
 
     </div>
+
+
+    <div class="row" id="notifications">
+        <div class="col-md-12 signup-wrapper">
+            <button id="signup" class="btn btn-success" data-toggle="modal" data-target="#notificationSignup">Sign up for recall notifications</button>
+            <p><small>Email and/or SMS notifications of updates regarding drug recalls and newly published data.</small></p>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="notificationSignup" tabindex="-1" role="dialog" aria-labelledby="notificationSignupLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Signup for Notifications</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div style="display: none;" class="alert alert-success" role="alert" id="success-signup class=" style="display: none;">
+                        You have successfully signed up for notifications.
+
+                    </div>
+                    You will receive a notification whenever new recall information or other updates are published about the drugs you selected.
+
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Email</span>
+                        <input type="text" name="email" id="email" placeholder="hack@rutgers.edu" class="form-control" />
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2">Phone</span>
+                        <input type="text" name="phone" id="phone" placeholder="123-456-7890" class="form-control" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="apply-notify" type="button" class="btn btn-danger">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <footer>
         <p>
