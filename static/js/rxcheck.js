@@ -32,8 +32,7 @@ $(document).ready(function() {
 
     $('#conditions-input').on('keyup', function () {
         var suggestions = $(this).parent().siblings('.suggestions');
-        suggestions.fadeOut();
-        suggestions.html('');
+        suggestions.hide();
 
         var condValue = $(this).val();
 
@@ -121,7 +120,7 @@ function reloadTable() {
             //Parse through text. If any of the conditions are said, bold it.
             $.each(conditions, function(index, value) {
                 if (warnings.indexOf(value) != -1)
-                    row.addClass('warning');
+                    row.addClass('conflict');
                 var re = new RegExp(value, "gi");
                 warnings = warnings.replace(re, ('<strong>' + value + '</strong>'));
             });
