@@ -9,8 +9,7 @@ $(document).ready(function() {
     $('#drugs-input').on('keyup', function (e) {
 
         var suggestions = $(this).parent().siblings('.suggestions');
-        suggestions.fadeOut();
-        suggestions.html('');
+        suggestions.hide();
 
         $.getJSON('/get/names/' + encodeURIComponent($(this).val()), function (data) {
 

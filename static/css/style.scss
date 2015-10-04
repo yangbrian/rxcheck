@@ -1,6 +1,23 @@
+@mixin transition($time){
+  -webkit-transition: all $time linear;
+  -moz-transition: all $time linear;
+  -ms-transition: all $time linear;
+  -o-transition: all $time linear;
+  transition: all $time linear;
+}
+
 body {
   font-family: Lato, sans-serif;
   font-size: 14px;
+  background-image: url('../img/pharmacy.jpg');
+  background-attachment: fixed;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+}
+
+a {
+  @include transition(0.5s);
 }
 
 .input-control {
@@ -18,10 +35,12 @@ body {
     border: 1px solid #bbb;
     position: absolute;
     background-color: #fff;
+    color: #000;
 
     .suggestion {
       padding: 10px;
       border-bottom: 1px solid #ccc;
+      @include transition(0.5s);
 
       &:hover {
         background-color: #b0e0e6;
@@ -34,4 +53,26 @@ body {
 
 .selected-items {
   max-height: 200px;
+  color: #000;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#resultTable {
+  margin-top: 10px;
+  color: #000;
+
+  tr {
+    background-color: rgba(255, 255, 255, 0.2);
+    @include transition(0.5s);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+  }
+}
+
+footer p {
+  text-align: center;
+  font-size: 0.85em;
+  color: #333;
 }
