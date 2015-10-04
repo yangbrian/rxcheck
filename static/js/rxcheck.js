@@ -1,5 +1,5 @@
-var drugNames = [];
-var conditions = [];
+var drugNames = ['CHANTECAILLE', 'Ipratropium Bromide', 'ECZEMA REAL RELIEF', 'Amnesteem'];
+var conditions = ['pregnant', 'breast-feeding'];
 
 $(document).ready(function() {
     $('.input-field').on('keyup', function(e) {
@@ -28,6 +28,19 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#warningsButton').on('click', function(e) {
-        console.log('warning');
+        $.each(drugNames, function(index, value) {
+            $.getJSON('/get/warnings/' + encodeURIComponent(value), function(data) {
+                var warnings = data.warnings_and_precautions.length > data.warnings.length ? data.warnings_and_precautions : data.warnings;
+                var row = $('<tr>');
+
+                row.append('<td>' + data.brand_name + '</td>');
+                row.append('<td>' + data.generic_name + '</td>');
+                row.append('<td>' + warnings + '</td>');
+                row.append('<td>' + data.active_ingredient + '</td>');
+                row.append('<td>' + data.inactive_ingredient + '</td>');
+
+                $('#resultTable').append(row);
+            })
+        })
     })
 });
