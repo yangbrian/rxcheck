@@ -25,5 +25,22 @@ def names(search):
                     status=200,
                     mimetype="application/json")
 
+@app.route('/get/warnings/<name>')
+def warnings(name):
+    client = MongoClient("mongodb://localhost:27017")
+
+    cursor = client.rxcheck.medInfo.find_one({'brand_name': {
+        '$regex': '^' + name
+            }}, {'brand_name': 1,
+                 'generic_name': 1,
+                 'warnings_and_precautions': 1,
+                 'warnings': 1,
+                 'active_ingredient': 1,
+                 'inactive_ingredient': 1})
+
+    return Response(response=dumps(cursor),
+                    status=200,
+                    mimetype="application/json")
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
