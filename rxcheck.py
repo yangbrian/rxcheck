@@ -18,7 +18,7 @@ def names(search):
         return doc.brand_name
 
     cursor = client.rxcheck.medInfo.find({'brand_name': {
-        '$regex': '^' + search
+        '$regex': '.*' + search
     }}, {'brand_name': 1}).distinct('brand_name')
 
     return Response(response=dumps(cursor),

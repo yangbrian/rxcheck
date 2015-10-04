@@ -23,19 +23,6 @@
 
 <div class="container">
 
-    <div class="row" id="items">
-        <div id="drug-list" class="col-md-6">
-            <ul data-field="drug-name">
-
-            </ul>
-        </div>
-        <div id="condition-list" class="col-md-6">
-            <ul data-field="conditions">
-                <li></li>
-            </ul>
-        </div>
-    </div>
-
     <div class="row" id="search">
         <div class="col-md-6">
             <h2>Enter Drugs</h2>
@@ -61,12 +48,18 @@
             <h2>Enter Medical Conditions</h2>
             <div class="form-group form-inline input-control">
                 <div class="input-group search-group">
-                    <input name="drug-name" type="text" class="input-field form-control" placeholder="Condition" aria-describedby="basic-addon2">
+                    <input id="conditions-input" name="drug-name" type="text" class="input-field form-control" placeholder="Condition" aria-describedby="basic-addon2">
                     <span class="input-group-addon add-item">Add</span>
                 </div>
                 <div class="suggestions" style="display: none;">
 
                 </div>
+            </div>
+
+            <div class="selected-items" id="selected-conditions">
+                <ul class="list-group">
+
+                </ul>
             </div>
         </div>
 
