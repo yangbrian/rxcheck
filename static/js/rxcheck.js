@@ -1,35 +1,72 @@
-var drugNames = ['CHANTECAILLE', 'Ipratropium Bromide', 'ECZEMA REAL RELIEF', 'Amnesteem'];
-var conditions = ['pregnant', 'breast-feeding'];
+var drugNames = [];
+var conditions = [];
+
+var possibleConditions = [
+    'pregnant', 'breast-feeding', 'alcohol', 'diabetes', 'nursing', 'psychosis', 'depression', 'thyroiditis'
+];
 
 $(document).ready(function() {
-    $('#drugs-input').on('keyup', function(e) {
+    $('#drugs-input').on('keyup', function (e) {
 
         var suggestions = $(this).parent().siblings('.suggestions');
         suggestions.fadeOut();
         suggestions.html('');
 
-        $.getJSON( '/get/names/' + encodeURIComponent($(this).val()), function( data ) {
+        $.getJSON('/get/names/' + encodeURIComponent($(this).val()), function (data) {
 
             console.log(data.length);
 
             if (data.length > 0)
                 suggestions.fadeIn();
 
-            $.each(data, function(index, value) {
+            $.each(data, function (index, value) {
                 var $new = $('<div>');
                 $new.addClass('suggestion');
                 $new.html(value);
 
                 suggestions.append($new);
 
-                $new.on('click', function() {
-                   addDrug(value, suggestions);
+                $new.on('click', function () {
+                    addDrug(value, suggestions);
                 });
             });
         });
     });
 
+    $('#conditions-input').on('keyup', function () {
+        var suggestions = $(this).parent().siblings('.suggestions');
+        suggestions.fadeOut();
+        suggestions.html('');
 
+        var condValue = $(this).val();
+
+        var fadeIn = false;
+        for (var i = 0; i < possibleConditions.length; i++) {
+
+            if (condValue === '') break;
+            if (possibleConditions[i].indexOf(condValue) === 0) {
+
+                if (!fadeIn) {
+                    suggestions.fadeIn();
+                    fadeIn = true;
+                }
+                var $new = $('<div>');
+                $new.addClass('suggestion');
+                $new.attr('data-value', possibleConditions[i]);
+                $new.html(possibleConditions[i]);
+
+                suggestions.append($new);
+
+                console.log($new);
+
+                $new.on('click', function () {
+                    addCondition($(this).attr('data-value'), suggestions);
+                });
+            }
+        }
+
+
+    });
 });
 
 function addDrug(value, suggestions) {
@@ -47,6 +84,22 @@ function addDrug(value, suggestions) {
     suggestions.html('');
     $('#drugs-input').val('');
 
+}
+
+function addCondition(value, suggestions) {
+    if(conditions.indexOf(value) == -1) {
+        conditions.push(value);
+
+        var newItem = $('<li>');
+        newItem.addClass('list-group-item');
+        newItem.html(value);
+
+        $('#selected-conditions').find('ul').append(newItem);
+    }
+
+    suggestions.fadeOut();
+    suggestions.html('');
+    $('#drugs-input').val('');
 
 }
 
