@@ -26,5 +26,7 @@
         </settings>
       </state>
     </states>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="Python 3.5.0 (/usr/local/bin/python3)" project-jdk-type="Python SDK">
+    <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

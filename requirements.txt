@@ -1,0 +1,4 @@
+Flask>=0.8
+Jinja2>=2.6
+requests==0.11.1
+pymongo>=0.1
