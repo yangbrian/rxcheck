@@ -2,11 +2,13 @@ var drugNames = [];
 var conditions = [];
 
 $(document).ready(function() {
-    $('.input-field').on('keyup', function(e) {
+    $('#drugs-input').on('keyup', function(e) {
 
-        var input = $(this);
+        var suggestions = $(this).parent().siblings('.suggestions');
+        suggestions.fadeOut();
+        suggestions.html('');
+
         $.getJSON( '/get/names/' + encodeURIComponent($(this).val()), function( data ) {
-            var suggestions = input.parent().siblings('.suggestions');
 
             console.log(data.length);
 
@@ -35,14 +37,15 @@ function addDrug(value, suggestions) {
         drugNames.push(value);
 
         var newItem = $('<li>');
+        newItem.addClass('list-group-item');
         newItem.html(value);
 
-        $('#drug-list').find('ul').append(newItem);
+        $('#selected-drugs').find('ul').append(newItem);
     }
 
     suggestions.fadeOut();
     suggestions.html('');
-    $('.input-field').val('');
+    $('#drugs-input').val('');
 
 
 }

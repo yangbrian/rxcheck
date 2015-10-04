@@ -2,9 +2,9 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>SeaCourses</title>
+    <title>rxCheck</title>
 
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,700,400italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
 
@@ -38,18 +38,27 @@
 
     <div class="row" id="search">
         <div class="col-md-6">
+            <h2>Enter Drugs</h2>
             <div class="form-group form-inline input-control">
                 <div class="input-group search-group">
-                    <input name="drug-name" type="text" class="input-field form-control" placeholder="Drug Name" aria-describedby="basic-addon2">
+                    <input id="drugs-input" name="drug-name" type="text" class="input-field form-control" placeholder="Drug Name" aria-describedby="basic-addon2">
                     <span class="input-group-addon add-item">Add</span>
                 </div>
-                <div class="suggestions" style="display: none;">
+                <div class="dropdown-menu suggestions" style="display: none;">
 
                 </div>
             </div>
+
+            <div class="selected-items" id="selected-drugs">
+                <ul class="list-group">
+
+                </ul>
+            </div>
+
         </div>
 
         <div class="col-md-6">
+            <h2>Enter Medical Conditions</h2>
             <div class="form-group form-inline input-control">
                 <div class="input-group search-group">
                     <input name="drug-name" type="text" class="input-field form-control" placeholder="Condition" aria-describedby="basic-addon2">
