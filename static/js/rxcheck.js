@@ -1,3 +1,6 @@
+var drugNames = [];
+var conditions = [];
+
 $(document).ready(function() {
     $('.input-field').on('keyup', function(e) {
 
@@ -21,4 +24,10 @@ $(document).ready(function() {
     });
 
 
+});
+
+$(document).ready(function() {
+    $('#warningsButton').on('click', function(e) {
+        console.log('warning');
+    })
 });
