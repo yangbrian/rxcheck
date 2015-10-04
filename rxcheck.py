@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request
 from pymongo import MongoClient
 from bson.json_util import dumps
 
@@ -44,6 +44,10 @@ def uploadEmail():
         collection.find_one_and_update(
             {'drug_name': drug},
             {'$push': {'users': userInfo}})
+
+    return Response(response='',
+                    status=200,
+                    mimetype="application/json")
 
 
 @app.route('/get/warnings/<name>')

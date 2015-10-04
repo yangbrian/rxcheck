@@ -73,7 +73,7 @@ $(document).ready(function() {
         $.post('/post/email/', {
             email: $('#email').val(),
             phone: $('#phone').val(),
-            drugs: drugNames
+            drugs: drugNames.join(",")
         }).done(function(data) {
             $('#success-signfup').fadeIn();
         });
