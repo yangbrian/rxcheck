@@ -35,6 +35,7 @@ $(document).ready(function() {
         suggestions.hide();
 
         var count = 0;
+        var condValue = $(this).val();
 
         var fadeIn = false;
         for (var i = 0; i < possibleConditions.length; i++) {
@@ -62,7 +63,7 @@ $(document).ready(function() {
                 });
 
                 count++;
-                if (count > 5) break;
+                if (count > 10) break;
             }
         }
 
